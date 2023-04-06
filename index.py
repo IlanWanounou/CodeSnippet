@@ -1,5 +1,6 @@
 import keyboard
 import json
+import time
 def loadData():
     try:
         with open("data.json") as json_file:
@@ -13,3 +14,5 @@ def on_key_press(key):
 
 keyboard.on_press(on_key_press)
 data = loadData()
+while True:
+    time.sleep(1)
