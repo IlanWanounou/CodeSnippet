@@ -52,7 +52,6 @@ def createWindow():
     for code in data.keys():
         listbox.insert(END, code)
 
-
     #root.protocol("WM_DELETE_WINDOW", on_close)
     root.iconbitmap("icon.ico")
     root.mainloop()
@@ -62,15 +61,3 @@ data = loadData()
 str = ""
 keyboard.on_press(on_key_press)
 createWindow()
-
-
-""" while True:
-    time.sleep(1) """
-
-
-""" data = codeSpinner()
-
-def seralizeData(data):
-    json_object = json.dumps(data, indent = 4)
-    with open("data.json", "w") as outfile:
-        outfile.write(json_object) """
