@@ -1,9 +1,7 @@
-import keyboard
 import json
-import time
-from plyer import notification
+import threading
 from tkinter import *
-
+from pynput import keyboard
 
 def loadData():
     try:
