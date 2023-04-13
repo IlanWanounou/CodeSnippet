@@ -13,17 +13,9 @@ def loadData():
     except:
         return {}
 
+def checkCode():
+    return on_press.key_sequence in data.keys()
 
-def checkCode(code):
-    global str
-    if code in data.values():
-        str = ""
-        notification.notify(title="Code correct", message="Code correct", timeout=5)
-    else:
-        if len(code) > 4:
-            notification.notify(
-                title="Code incorrect", message="Code incorrect", timeout=5
-            )
 
 
 def on_key_press(key):
