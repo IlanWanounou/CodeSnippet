@@ -63,4 +63,3 @@ keyboard.on_press(on_key_press)
 createWindow()
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
-
