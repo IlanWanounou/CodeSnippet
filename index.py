@@ -44,7 +44,7 @@ def createWindow():
     for code in data.keys():
         listbox.insert(END, code)
 
-    #root.protocol("WM_DELETE_WINDOW", on_close)
+with keyboard.Listener(on_press=on_press) as listener:
     root.iconbitmap("icon.ico")
     root.mainloop()
 
