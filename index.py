@@ -58,7 +58,7 @@ with keyboard.Listener(on_press=on_press) as listener:
 
 root = Tk()
 data = loadData()
-str = ""
+
 # Initialiser la séquence de touches stockée en mémoire
 on_press.key_sequence = ""
 createWindow()
