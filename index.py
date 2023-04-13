@@ -17,12 +17,22 @@ def checkCode():
     return on_press.key_sequence in data.keys()
 
 
+def clear():
+    on_press.key_sequence = ""
+    return
 
-def on_key_press(key):
-    global str
-    str += key.name
-    checkCode(str)
-
+def on_press(key):
+    try:
+        on_press.key_sequence += key.char
+        if  checkCode():
+            for i in range(len(on_press.key_sequence)):
+                keyboard.Controller().press(keyboard.Key.backspace)
+                keyboard.Controller().release(keyboard.Key.backspace)
+            keyboard.Controller().type(data[on_press.key_sequence])
+            threading.Timer(0.1, clear).start()
+            
+    except AttributeError:
+        pass
 
 def createWindow():
     global root
@@ -53,3 +63,6 @@ data = loadData()
 str = ""
 keyboard.on_press(on_key_press)
 createWindow()
+with keyboard.Listener(on_press=on_press) as listener:
+    listener.join()
+
