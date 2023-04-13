@@ -59,7 +59,8 @@ with keyboard.Listener(on_press=on_press) as listener:
 root = Tk()
 data = loadData()
 str = ""
-keyboard.on_press(on_key_press)
+# Initialiser la séquence de touches stockée en mémoire
+on_press.key_sequence = ""
 createWindow()
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
