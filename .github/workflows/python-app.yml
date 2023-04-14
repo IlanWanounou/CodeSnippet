@@ -25,5 +25,5 @@ jobs:
 
     - name: Run application
       env:
-        DISPLAY: 0
+        DISPLAY: :0
       run: python index.py
