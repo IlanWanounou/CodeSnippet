@@ -1,7 +1,10 @@
 import json
 import threading
 from tkinter import *
-from pynput import keyboard
+try:
+    from pynput import keyboard
+except ImportError as e:
+    print("Error: {}".format(e))
 
 def loadData():
     try:
