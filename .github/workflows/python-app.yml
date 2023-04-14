@@ -24,4 +24,6 @@ jobs:
         pip install pynput
 
     - name: Run application
+      env:
+        DISPLAY: 0
       run: python index.py
