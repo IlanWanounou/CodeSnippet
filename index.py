@@ -22,7 +22,6 @@ def loadData():
 def checkCode():
     return on_press.key_sequence in data.keys()
 
-
 def clear():
     on_press.key_sequence = ""
     return
@@ -42,6 +41,7 @@ def on_press(key):
 
 def createWindow():
     global root
+    global data
     root.geometry("500x500")
     # Création de la PanedWindow
     pw = PanedWindow(root, orient=HORIZONTAL)
@@ -60,15 +60,24 @@ def createWindow():
     for code in data.keys():
         listbox.insert(END, code)
 
-with keyboard.Listener(on_press=on_press) as listener:
-    root.iconbitmap("icon.ico")
+    #root.protocol("WM_DELETE_WINDOW", on_close)
+    #root.iconbitmap("icon.ico")
+    root.title("Code Manager")
     root.mainloop()
+    
+    #root.update()
+
 
 root = Tk()
 data = loadData()
 
 # Initialiser la séquence de touches stockée en mémoire
-on_press.key_sequence = ""
+#on_press.key_sequence = ""
+
+
+#t1 = threading.Thread(target=createWindow)
+#t2 = threading.Thread(target=keyboard.Listener(on_press=on_press).start)
 createWindow()
-with keyboard.Listener(on_press=on_press) as listener:
-    listener.join()
+#t1.start()
+#t2.start()
+#root.mainloop()
