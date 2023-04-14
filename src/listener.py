@@ -1,5 +1,6 @@
 import json
 import threading
+import re
 from pynput import keyboard
 
 def load_data():
@@ -9,29 +10,34 @@ def load_data():
             return data
     except:
         return {}
-    
+
 def check_code():
-    return on_press.key_sequence in data.keys()
+    if next((key for key in data.keys() if re.search(key, on_press.key_sequence)), None):
+        return True, next((key for key in data.keys() if re.search(key, on_press.key_sequence)), None)
+    else:
+        return False, None
 
 def clear():
     on_press.key_sequence = ""
     return
 
 def on_press(key):
+    global data
     try:
         on_press.key_sequence += key.char
-        if  check_code():
-            for i in range(len(on_press.key_sequence)):
+        if check_code()[0]:
+            key = check_code()[1]
+            for i in range(len(key)):
                 keyboard.Controller().press(keyboard.Key.backspace)
                 keyboard.Controller().release(keyboard.Key.backspace)
-            keyboard.Controller().type(data[on_press.key_sequence])
+            on_press.key_sequence = ""
+            keyboard.Controller().type(data[key])
             threading.Timer(0.1, clear).start()
             
     except AttributeError:
         pass
-
-data = load_data()
 on_press.key_sequence = ""
+data = load_data()
 
 with keyboard.Listener(on_press=on_press) as listener:
     listener.join()
