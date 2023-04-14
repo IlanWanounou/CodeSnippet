@@ -24,7 +24,7 @@ def clear():
 def on_press(key):
     global data
     try:
-        on_press.key_sequence += key.char
+        on_press.key_sequence += str(key.char)
         if check_code()[0]:
             key = check_code()[1]
             for i in range(len(key)):
