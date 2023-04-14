@@ -5,6 +5,11 @@ try:
     from pynput import keyboard
 except ImportError as e:
     print("Error: {}".format(e))
+    
+# workflow
+import os
+os.environ['DISPLAY'] = ':0'
+
 
 def loadData():
     try:
