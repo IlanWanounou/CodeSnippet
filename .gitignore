@@ -2,3 +2,7 @@
 data.json
 
 index.spec
+
+dist/
+
+build/
