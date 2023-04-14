@@ -25,5 +25,5 @@ jobs:
 
     - name: Run application
       env:
-        DISPLAY: :0
-      run: python index.py
+        DISPLAY: ":99"
+      run: python index.py --no-display
