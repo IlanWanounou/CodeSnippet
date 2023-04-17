@@ -29,6 +29,14 @@ def createWindow():
     for code in data.keys():
         listbox.insert(END, code)
 
+    # Création d'une Scrollbar pour la Listbox
+    scrollbar = Scrollbar(list_frame, orient=VERTICAL, command=listbox.yview)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    listbox.config(yscrollcommand=scrollbar.set)
+    
+    # On lie l'événement à la Listbox
+    listbox.bind('<<ListboxSelect>>', on_select)
+
     #root.protocol("WM_DELETE_WINDOW", on_close)
     root.iconbitmap("icon.ico")
     root.mainloop()
