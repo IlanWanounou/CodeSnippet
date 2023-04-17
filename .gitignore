@@ -6,3 +6,5 @@ index.spec
 dist/
 
 build/
+
+src/__pycache__/
