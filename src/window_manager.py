@@ -19,7 +19,7 @@ def createWindow():
     # Création de deux frames
     list_frame = Frame(pw, width=100, height=200, background="white")
     pw.add(list_frame)
-    pw.add(Label(pw, text="", background="white"))
+    pw.add(Frame(pw, width=400, height=200, background="white"))
 
     # Création d'une Listbox pour afficher les éléments de la liste
     listbox = Listbox(list_frame)
