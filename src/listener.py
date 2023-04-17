@@ -39,5 +39,8 @@ def on_press(key):
 on_press.key_sequence = ""
 data = load_data()
 
-with keyboard.Listener(on_press=on_press) as listener:
-    listener.join()
+
+def start_listener():
+    with keyboard.Listener(on_press=on_press) as listener:
+        listener.join()
+
