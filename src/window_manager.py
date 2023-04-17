@@ -40,8 +40,32 @@ def createWindow():
     #root.protocol("WM_DELETE_WINDOW", on_close)
     root.iconbitmap("icon.ico")
     root.mainloop()
+
+def on_select(event):
+    # On récupère l'index de l'élément sélectionné
+    index = event.widget.curselection()[0]
+    # On récupère l'élément sélectionné
+    value = event.widget.get(index)
+
+    # On récupère la frame de droite
+    frame = event.widget.master.master.master.children["!panedwindow"].children["!frame2"]
+
+    # On supprime le contenu de la frame de droite
+    for widget in frame.winfo_children():
+        widget.destroy()
     
-    #root.update()   
+
+    # On ajoute le contenu de l'élément sélectionné
+
+    inputText = StringVar()
+    inputText.set(data[value])
+    input = Entry(frame, textvariable=inputText, width=50)
+    input.pack()
+
+
+    Button(frame, text="Valider l'edition").pack()
+
+
 
 data=load_data()
 
