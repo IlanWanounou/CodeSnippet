@@ -36,8 +36,14 @@ def createWindow():
     
     # On lie l'événement à la Listbox
     listbox.bind('<<ListboxSelect>>', on_select)
-
+    
     #root.protocol("WM_DELETE_WINDOW", on_close)
+    button_frame = Frame(root)
+    button_frame.pack(side=BOTTOM, pady=10)
+    
+    # Création du bouton
+    button = Button(button_frame, text="Ajouter")
+    button.pack()
     root.iconbitmap("icon.ico")
     root.mainloop()
 
