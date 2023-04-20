@@ -45,7 +45,7 @@ def on_select(event):
     # On récupère l'index de l'élément sélectionné
     index = event.widget.curselection()[0]
     # On récupère l'élément sélectionné
-    value = event.widget.get(index)
+    key = event.widget.get(index)
 
     # On récupère la frame de droite
     frame = event.widget.master.master.master.children["!panedwindow"].children["!frame2"]
@@ -58,14 +58,20 @@ def on_select(event):
     # On ajoute le contenu de l'élément sélectionné
 
     inputText = StringVar()
-    inputText.set(data[value])
+    inputText.set(data[key])
     input = Entry(frame, textvariable=inputText, width=50)
     input.pack()
 
 
     Button(frame, text="Valider l'edition").pack()
 
-
+def on_update(inputText, key):
+    # On met à jour la valeur de l'élément sélectionné
+    data[key] = inputText
+    # On sauvegarde la nouvelle valeur dans le fichier
+    with open("data.json", "w") as json_file:
+        json.dump(data, json_file)
+   
 
 data=load_data()
 
