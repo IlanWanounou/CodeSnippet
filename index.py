@@ -1,6 +1,8 @@
+"""Main file for the program."""
+
+import threading
 from src import listener
 from src import window_manager
-import threading
 
 listener_thread = threading.Thread(target=listener.start_listener)
 window_manager_thread = threading.Thread(target=window_manager.createWindow)
