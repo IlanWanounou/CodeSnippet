@@ -1,15 +1,7 @@
-import json
 import threading
 import re
 from pynput import keyboard
-
-def load_data():
-    try:
-        with open("data.json") as json_file:
-            data = json.load(json_file)
-            return data
-    except:
-        return {}
+from src import utils
 
 def check_code():
     if next((key for key in data.keys() if re.search(key, on_press.key_sequence)), None):
@@ -40,7 +32,7 @@ def on_press(key):
     except AttributeError:
         pass
 on_press.key_sequence = ""
-data = load_data()
+data = utils.load_data()
 
 
 def start_listener():

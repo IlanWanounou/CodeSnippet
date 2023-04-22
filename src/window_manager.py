@@ -1,14 +1,7 @@
 from tkinter import *
 import json
 from tkinter import messagebox
-
-def load_data():
-    try:
-        with open("data.json") as json_file:
-            data = json.load(json_file)
-            return data
-    except:
-        return {}
+from src import utils
 
 def createWindow():
     root = Tk()
@@ -87,7 +80,7 @@ def on_add_validate(snippet, value):
                 json.dump(data, json_file)
                 json_file.close()
             
-            data=load_data()
+            data=utils.load_data()
                 
     except:
         messagebox.showerror("Erreur", "Une erreur est survenue")
@@ -123,5 +116,5 @@ def create_list_box(pw, root):
     button.pack()
     button.bind("<Button-1>", on_add)
     
-data=load_data()
+data=utils.load_data()
 
