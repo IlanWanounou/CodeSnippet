@@ -16,34 +16,9 @@ def createWindow():
     pw = PanedWindow(root, orient=HORIZONTAL)
     pw.pack(fill=BOTH, expand=1)
 
-    # Création de deux frames
-    list_frame = Frame(pw, width=100, height=200, background="white")
-    pw.add(list_frame)
-    pw.add(Frame(pw, width=400, height=200, background="white"))
+    create_list_box(pw, root)
 
     # Création d'une Listbox pour afficher les éléments de la liste
-    listbox = Listbox(list_frame)
-    listbox.pack(side=LEFT, fill=BOTH, expand=1)
-
-    # Ajout des éléments à la liste
-    for code in data.keys():
-        listbox.insert(END, code)
-
-    # Création d'une Scrollbar pour la Listbox
-    scrollbar = Scrollbar(list_frame, orient=VERTICAL, command=listbox.yview)
-    scrollbar.pack(side=RIGHT, fill=Y)
-    listbox.config(yscrollcommand=scrollbar.set)
-    
-    # On lie l'événement à la Listbox
-    listbox.bind('<<ListboxSelect>>', on_select)
-    
-    #root.protocol("WM_DELETE_WINDOW", on_close)
-    button_frame = Frame(root)
-    button_frame.pack(side=BOTTOM, pady=10)
-    
-    # Création du bouton
-    button = Button(button_frame, text="Ajouter")
-    button.pack()
     root.iconbitmap("icon.ico")
     root.mainloop()
 
@@ -78,6 +53,36 @@ def on_update(inputText, key):
     with open("data.json", "w") as json_file:
         json.dump(data, json_file)
    
+def create_list_box(pw, root):
+     # Création de deux frames
+    list_frame = Frame(pw, width=100, height=200, background="white")
+    pw.add(list_frame)
+    pw.add(Frame(pw, width=400, height=200, background="white"))
 
+    # Création d'une Listbox pour afficher les éléments de la liste
+    listbox = Listbox(list_frame)
+    listbox.pack(side=LEFT, fill=BOTH, expand=1)
+
+    # Ajout des éléments à la liste
+    for code in data.keys():
+        listbox.insert(END, code)
+        
+    # Création d'une Scrollbar pour la Listbox
+    scrollbar = Scrollbar(list_frame, orient=VERTICAL, command=listbox.yview)
+    scrollbar.pack(side=RIGHT, fill=Y)
+    listbox.config(yscrollcommand=scrollbar.set)
+    
+    # On lie l'événement à la Listbox
+    listbox.bind('<<ListboxSelect>>', on_select)
+    
+    # Création d'une frame pour le bouton
+    button_frame = Frame(root)
+    button_frame.pack(side=BOTTOM, pady=10)
+    
+    # Création du bouton
+    button = Button(button_frame, text="Ajouter")
+    button.pack()
+    button.bind("<Button-1>", on_add)
+    
 data=load_data()
 
