@@ -2,9 +2,10 @@
 import json
 
 def load_data():
+    """Loads the data from the data.json file."""
     try:
-        with open("data.json") as json_file:
+        with open("data.json", "r", encoding="utf-8") as json_file:
             data = json.load(json_file)
             return data
-    except:
+    except FileNotFoundError:
         return {}
