@@ -22,7 +22,7 @@ def on_press(key):
             on_press.key_sequence += key.char
         if check_code()[0]:
             key = check_code()[1]
-            for i in range(len(key)):
+            for _ in range(len(key)):
                 keyboard.Controller().press(keyboard.Key.backspace)
                 keyboard.Controller().release(keyboard.Key.backspace)
             on_press.key_sequence = ""
