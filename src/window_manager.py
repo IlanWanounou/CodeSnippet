@@ -1,9 +1,13 @@
-from tkinter import *
+"""Module that manages the main application window"""
 import json
-from tkinter import messagebox
+from tkinter import (Scrollbar, Tk, messagebox, StringVar, Entry, Button,
+                     Label, PanedWindow, HORIZONTAL, BOTH, BOTTOM, Frame,
+                     LEFT, RIGHT, Y, VERTICAL, END, Listbox)
+
 from src import utils
 
-def createWindow():
+def create_window():
+    """Create the main window"""
     root = Tk()
     root.geometry("500x500")
     # Création de la PanedWindow
@@ -28,7 +32,6 @@ def on_select(event):
     # On supprime le contenu de la frame de droite
     for widget in frame.winfo_children():
         widget.destroy()
-    
 
     # On ajoute le contenu de l'élément sélectionné
 
@@ -38,11 +41,12 @@ def on_select(event):
     input.pack()
 
 
-    Button(frame, text="Valider l'edition").pack()
+    Button(frame, text="Valider l'edition", command= lambda:on_update(input.get(), key)).pack()
 
-def on_update(inputText, key):
+def on_close(root):
+def on_update(value, key):
     # On met à jour la valeur de l'élément sélectionné
-    data[key] = inputText
+    data[key] = value
     # On sauvegarde la nouvelle valeur dans le fichier
     with open("data.json", "w") as json_file:
         json.dump(data, json_file)
@@ -59,14 +63,15 @@ def on_add(event):
     Label(frame, text="snippet").pack()
     snippet = StringVar()
     input = Entry(frame, textvariable=snippet, width=50)
-    input.pack()
-    
+    input.pack()    
     Label(frame, text="valeur").pack()
     value = StringVar()
     input = Entry(frame, textvariable=value, width=50)
     input.pack()
 
-    Button(frame, text="Valider l'ajout", command= lambda:on_add_validate(snippet.get(), value.get())).pack()
+    Button(frame, text="Valider l'ajout",
+    command=lambda: on_add_validate(snippet.get(), value.get())).pack()
+
 
 def on_add_validate(snippet, value):
     try:
@@ -80,8 +85,7 @@ def on_add_validate(snippet, value):
                 json.dump(data, json_file)
                 json_file.close()
             
-            data=utils.load_data()
-                
+            data=utils.load_data()                
     except:
         messagebox.showerror("Erreur", "Une erreur est survenue")
 
@@ -117,4 +121,3 @@ def create_list_box(pw, root):
     button.bind("<Button-1>", on_add)
     
 data=utils.load_data()
-
