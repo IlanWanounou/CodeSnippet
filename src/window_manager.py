@@ -1,5 +1,6 @@
 from tkinter import *
 import json
+from tkinter import messagebox
 
 def load_data():
     try:
@@ -52,7 +53,45 @@ def on_update(inputText, key):
     # On sauvegarde la nouvelle valeur dans le fichier
     with open("data.json", "w") as json_file:
         json.dump(data, json_file)
-   
+
+def on_add(event):
+    # On récupère la frame de droite
+    frame = event.widget.master.master.children["!panedwindow"].children["!frame2"]
+
+    # On supprime le contenu de la frame de droite
+    for widget in frame.winfo_children():
+        widget.destroy()
+    
+    # On ajoute le contenu de l'élément sélectionné
+    Label(frame, text="snippet").pack()
+    snippet = StringVar()
+    input = Entry(frame, textvariable=snippet, width=50)
+    input.pack()
+    
+    Label(frame, text="valeur").pack()
+    value = StringVar()
+    input = Entry(frame, textvariable=value, width=50)
+    input.pack()
+
+    Button(frame, text="Valider l'ajout", command= lambda:on_add_validate(snippet.get(), value.get())).pack()
+
+def on_add_validate(snippet, value):
+    try:
+        if(snippet == value):
+            messagebox.showerror("Erreur", "Le snippet et la valeur ne peuvent pas être identiques")
+        else:
+            # On met à jour la valeur de l'élément sélectionné
+            data[snippet] = value
+            # On sauvegarde la nouvelle valeur dans le fichier
+            with open("data.json", "w") as json_file:
+                json.dump(data, json_file)
+                json_file.close()
+            
+            data=load_data()
+                
+    except:
+        messagebox.showerror("Erreur", "Une erreur est survenue")
+
 def create_list_box(pw, root):
      # Création de deux frames
     list_frame = Frame(pw, width=100, height=200, background="white")
