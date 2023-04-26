@@ -20,6 +20,8 @@ from tkinter import (
     END,
     Listbox,
 )
+from src import listener
+
 
 from src import utils
 
@@ -124,7 +126,8 @@ def on_add_validate(snippet, value):
             with open("data.json", "w", encoding="utf-8") as json_file:
                 json.dump(data, json_file)
             # On crée une nouvelle fenêtre pour mettre à jour la liste et on supprime l'ancienne
-            create_window()
+            # create_window()
+            listener.data = utils.update_data()
 
     except (ValueError, TypeError):
         messagebox.showerror("Erreur", "Une erreur de type est survenue")

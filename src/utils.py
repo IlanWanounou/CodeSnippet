@@ -1,6 +1,7 @@
 """This module contains utility functions for the application."""
 import json
 
+
 def load_data():
     """Loads the data from the data.json file."""
     try:
@@ -9,3 +10,8 @@ def load_data():
             return data
     except FileNotFoundError:
         return {}
+
+
+def update_data():
+    """Update the data dictionary"""
+    return load_data()
