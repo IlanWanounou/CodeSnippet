@@ -9,6 +9,8 @@ def load_data():
             data = json.load(json_file)
             return data
     except FileNotFoundError:
+        with open("data.json", "w", encoding="utf-8") as json_file:
+            json.dump({}, json_file)
         return {}
 
 
